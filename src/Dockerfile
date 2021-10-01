@@ -1,7 +1,7 @@
-FROM python:3.8
-WORKDIR /app
+FROM python:3.8-slim-buster
+EXPOSE 5000
 COPY requirements.txt .
 RUN python -m pip install -r requirements.txt
-COPY . .
-EXPOSE 5000
+WORKDIR /app
+COPY . /app
 CMD ["gunicorn", "--workers=3", "--bind", "0.0.0.0:5000", "app:app"]
